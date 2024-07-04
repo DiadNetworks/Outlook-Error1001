@@ -64,7 +64,9 @@ Roaming of the work account's device certificate is not supported. The certifica
     - Create a folder (name it what you like, `FSLogix-Redirections` seems clean) somewhere accessible from the servers that are using FSLogix. This can be a shared file location on your network. **Important:** Make sure all users have permission to access this folder.  
     - Now place the `redirections.xml` file in that folder.  
     - Now find and edit your group policy for the servers that are using FSLogix. This can be a group policy used for multiple servers in group policy management on a domain controller, or just the local group policy on a single server - depends on your setup.  
-    - Navigate to the `Redirection XML Source Folder` policy located at `Computer Configuration > Policies > Administrative Templates > FSLogix > Profile Containers`, see image:  
+    - Navigate to the `Redirection XML Source Folder` policy located at `Computer Configuration > Policies > Administrative Templates > FSLogix > Profile Containers`:
+      ![mstsc_gq5F3qgv5b](https://github.com/DiadNetworks/Outlook-Error1001/assets/143122318/61b3539f-8154-4407-88ab-90e0e58c8d2a)
+
     - Double click the policy to edit it. By default this policy is set to "Not configured", change that to "Enabled". For the "Redirection XML Source Folder" value, enter the path to the folder that your `redirections.xml` file is in. **Note:** The path to the folder that it's located in, not the path to the actual file.  
     - Apply the policy and you're done.  
 
@@ -98,7 +100,7 @@ Choose a user from your domain to use for testing and continue.
         [23:36:32.099][tid:00000f10.00003bdc][INFO]             Added redirection C:\Users\%username%\AppData\Local\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams\EBWebView\WV2Profile_tfw\WebStorage -> C:\Users\local_%username%\AppData\Local\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams\EBWebView\WV2Profile_tfw\WebStorage
         ```
 
-4. If the logs check out, the issue is now fixed. If the log has issues, double check these two important notes:
+4. If the logs check out, the problem is now fixed. If the log has issues, double check these two important notes:
     - The value in the group policy should be the path to the parent folder of `redirections.xml`, not the path to the actual `redirections.xml` file.  
     - All users need to have at minimum "read" access to the parent folder of `redirections.xml` and at minimum "read" access to the `redirections.xml` file.
 
