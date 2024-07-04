@@ -42,7 +42,7 @@ Roaming of the work account's device certificate is not supported. The certifica
 ```
 
 ## Fixing the problem:
-1. We need a `redirections.xml` file to tell FSLogix what to exclude from roaming. Download the `redirections.xml` file from the repository or copy this into your own `redirections.xml` file:
+1. We need a `redirections.xml` file to tell FSLogix what to exclude from roaming. Download the [redirections.xml file](https://github.com/DiadNetworks/Outlook-Error1001/blob/main/redirections.xml) from the repository or copy this into your own `redirections.xml` file:
     ```
     <?xml version="1.0"  encoding="UTF-8"?>
     <FrxProfileFolderRedirection ExcludeCommonFolders="0">
@@ -110,3 +110,9 @@ The credentials for Outlook need to be cleared before you can sign in again.
 An easy way to do this is to open Excel (or Word), go to the account settings and sign out.  
 
 Now, when you sign into Outlook it should ask for an email address and password (whereas previously it would maybe have the password or email saved).
+
+  ----
+### Sources:
+https://support.microsoft.com/en-us/office/error-something-went-wrong-1001-signing-in-to-microsoft-365-desktop-applications-6f63238d-d83c-437c-a929-de72fe819793  
+https://learn.microsoft.com/en-us/fslogix/concepts-redirections-xml  
+https://learn.microsoft.com/en-us/fslogix/tutorial-redirections-xml
