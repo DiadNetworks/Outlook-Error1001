@@ -1,0 +1,14 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<FrxProfileFolderRedirection ExcludeCommonFolders="0">
+<Excludes>
+<Exclude>%localappdata%\Packages\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy</Exclude>
+<Exclude>%localappdata%\Packages\Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy</Exclude>
+<Exclude>%localappdata%\Packages</Exclude>
+<Exclude>%localappdata%\Microsoft\TokenBroker</Exclude>
+<Exclude>HKEY_CURRENT_USER\SOFTWARE\Microsoft\IdentityCRL</Exclude>
+<Exclude>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AAD</Exclude>
+<Exclude>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WorkplaceJoin</Exclude>
+</Excludes>
+<Includes>
+</Includes>
+</FrxProfileFolderRedirection>
