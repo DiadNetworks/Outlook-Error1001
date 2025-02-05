@@ -4,7 +4,7 @@ A guide to fixing: *Error “Something Went Wrong [1001]” signing in to Micros
 ![image](https://github.com/DiadNetworks/Outlook-Error1001/assets/143122318/71381185-09e3-47df-9960-04122321106e)
 
 ## What we are fixing:
-The error “Something Went Wrong [1001]” when signing into Microsoft 365 desktop applications. More specifically, here we are focusing on Outlook desktop.  
+The error “Something Went Wrong [1001]” (and errors 58tm1, 62ubh or similar) when signing into Microsoft 365 desktop applications. More specifically, here we are focusing on Outlook desktop.  
 
 There are 2 known causes for this error:
 1. Security software impacting the WAM plug-in (AAD.BrokerPlugin).
@@ -110,6 +110,52 @@ The credentials for Outlook need to be cleared before you can sign in again.
 An easy way to do this is to open Excel (or Word), go to the account settings and sign out.  
 
 Now, when you sign into Outlook it should ask for an email address and password (whereas previously it would maybe have the password or email saved).
+
+## If the previous steps didn't fully resolve the issue and you're now getting Error 58tm1 or Error 62ubh etc.
+If after all the previous steps you get errors 58tm1 or 62ubh or similar:
+![Obsidian_XGgYCNOfc8](https://github.com/user-attachments/assets/7ebf31fd-7157-40c5-a6b7-eec971267677)
+
+Edit your `redirections.xml` file to include the following:
+```
+<Exclude>%localappdata%\Microsoft\OneAuth\accounts</Exclude>
+<Exclude>%localappdata%\Microsoft\OneAuth\blobs</Exclude>
+<Exclude>%localappdata%\Microsoft\Outlook</Exclude>
+<Exclude>%appdata%\Microsoft\Outlook</Exclude>
+<Exclude>%localappdata%\Microsoft\IdentityCache</Exclude>
+<Exclude>HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\Identity</Exclude>
+<Exclude>HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Common\Identity</Exclude>
+```
+
+The full `redirections.xml` should now look like this:
+```
+<?xml version="1.0"  encoding="UTF-8"?>
+<FrxProfileFolderRedirection ExcludeCommonFolders="0">
+<Excludes>
+<Exclude>%localappdata%\Packages\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy</Exclude>
+<Exclude>%localappdata%\Packages\Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy</Exclude>
+<Exclude>%localappdata%\Packages</Exclude>
+<Exclude>%localappdata%\Microsoft\TokenBroker</Exclude>
+<Exclude>%localappdata%\Microsoft\OneAuth\accounts</Exclude>
+<Exclude>%localappdata%\Microsoft\OneAuth\blobs</Exclude>
+<Exclude>%localappdata%\Microsoft\Outlook</Exclude>
+<Exclude>%appdata%\Microsoft\Outlook</Exclude>
+<Exclude>%localappdata%\Microsoft\IdentityCache</Exclude>
+<Exclude>HKEY_CURRENT_USER\SOFTWARE\Microsoft\IdentityCRL</Exclude>
+<Exclude>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AAD</Exclude>
+<Exclude>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WorkplaceJoin</Exclude>
+<Exclude>HKEY_CURRENT_USER\Software\Microsoft\Office\16.0\Common\Identity</Exclude>
+<Exclude>HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Common\Identity</Exclude>
+</Excludes>
+<Includes>
+</Includes>
+</FrxProfileFolderRedirection>
+```
+
+Sign the user out and back in to apply the new exclusions and sign into Outlook again (you may need to sign out through Excel again first).
+  
+**Note:**
+- Adding these exclusions will make it so that almost all Outlook data is stored on the local server and not in your FSLogix drive. If you're using Outlook in Cached Exchange mode, this can easily consume a lot of storage space.
+- Additionally, since the credential tokens are no longer being stored in FSLogix, users will have to sign into Outlook on each server being managed with FSLogix.
 
   ----
 ### Sources:
